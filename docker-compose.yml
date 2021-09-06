@@ -1,0 +1,19 @@
+version: "3.8"
+volumes:
+  mda-crawler-postgres:
+services:
+  postgres:
+    image: postgres:12.0-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=mda_crawler
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=mda_wiki_crawler_repo_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - mda-crawler-postgres:/var/lib/postgresql/data
+    logging:
+      options:
+        max-file: "5"
+        max-size: "10m"
